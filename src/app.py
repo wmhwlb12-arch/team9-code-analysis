@@ -14,7 +14,7 @@ def history():
     chat_id = request.args.get("chat_id", "demo-1")
     db = connection()
     try:
-        rows = db.execute("SELECT body FROM messages WHERE chat_id = '" + chat_id + "'").fetchall()
+               rows = db.execute("SELECT body FROM messages WHERE chat_id = ?", (chat_id,)).fetchall()
         return jsonify([row[0] for row in rows])
     finally:
         db.close()
